@@ -1,0 +1,7 @@
+spring:
+  rsocket:
+    server:
+      port: 8888
+  mvc:
+    async:
+      request-timeout: -1
