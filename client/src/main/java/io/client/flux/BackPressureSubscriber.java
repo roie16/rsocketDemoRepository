@@ -1,6 +1,6 @@
-package com.example.demo.flux;
+package io.client.flux;
 
-import com.example.demo.data.HelloResponse;
+import io.client.data.HelloResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;

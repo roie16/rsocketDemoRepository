@@ -1,4 +1,4 @@
-package com.example.demo.flux;
+package io.client.flux;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -14,11 +14,6 @@ public class SubscriberWithBackPressure implements Subscriber<Integer> {
 
     private Subscription s;
     private int onNextAmount;
-    private final Collection<Integer> elements;
-
-    public SubscriberWithBackPressure(Collection<Integer> elements) {
-        this.elements = elements;
-    }
 
     @Override
     public void onSubscribe(Subscription s) {
@@ -28,7 +23,6 @@ public class SubscriberWithBackPressure implements Subscriber<Integer> {
 
     @Override
     public void onNext(Integer integer) {
-        elements.add(integer);
         onNextAmount++;
         if (onNextAmount % 2 == 0) {
             s.request(2);

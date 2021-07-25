@@ -1,7 +1,7 @@
-package io.demo.demo;
+package io.server;
 
-import io.demo.demo.data.HelloRequest;
-import io.demo.demo.data.HelloResponse;
+import io.server.data.HelloRequest;
+import io.server.data.HelloResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.messaging.handler.annotation.MessageMapping;

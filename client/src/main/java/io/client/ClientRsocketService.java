@@ -1,7 +1,7 @@
-package com.example.demo;
+package io.client;
 
-import com.example.demo.data.HelloRequest;
-import com.example.demo.data.HelloResponse;
+import io.client.data.HelloRequest;
+import io.client.data.HelloResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.rsocket.RSocketRequester;
 import org.springframework.stereotype.Service;
