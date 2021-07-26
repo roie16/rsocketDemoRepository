@@ -32,7 +32,9 @@ public class ClientRsocketService {
     public Mono<HelloResponse> monoCall(HelloRequest helloRequest) {
         log.info(helloRequest.toString());
         return rsocketRequester.route("say.hello.reactive.mono").data(helloRequest)
-                .retrieveMono(HelloResponse.class).onErrorReturn(new HelloResponse("Hello You are probably illegal please check info"));
+                .retrieveMono(HelloResponse.class);
+        //.onErrorResume((throwable) ->  Mono.just(new HelloResponse("the error is:" + throwable)));
+        //.onErrorReturn(new HelloResponse("You are to young to be in this, or are already dead"))
     }
 
     public Flux<HelloResponse> fluxWithError(Flux<HelloRequest> helloRequestFlux) {
@@ -45,33 +47,3 @@ public class ClientRsocketService {
     }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//where to put this??
-//.onErrorReturn(new HelloResponse("Hello You are probably illegal please check info "))

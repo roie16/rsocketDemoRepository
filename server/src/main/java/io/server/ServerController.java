@@ -37,7 +37,7 @@ public class ServerController {
     @MessageMapping("say.hello.reactive.flux")
     Flux<HelloResponse> helloResponseFlux(@Payload @Valid HelloRequest request) {
         Stream<HelloResponse> helloResponseStream = Stream.generate(() -> generateHelloMsg(request.name(), request.age()));
-        return Flux.fromStream(helloResponseStream).delayElements(Duration.ofSeconds(1));
+        return Flux.fromStream(helloResponseStream).delayElements(Duration.ofSeconds(1)).take(20);
     }
 
     @MessageMapping("say.hello.reactive.mono")
@@ -53,9 +53,8 @@ public class ServerController {
     private HelloResponse generateHelloMsg(String name, int age) {
         return switch (name) {
             case "Roie" -> new HelloResponse("Hello " + name + " you are old");
-            case "Daniel" -> {
-                int newAge = age * 2;
-                yield new HelloResponse("Hello " + name + " you are young so I made you older, new age:" + newAge);
+            case "Roni" -> {
+                yield new HelloResponse("Hello " + name + " thank you for making this lecture happen :) ");
             }
             default -> new HelloResponse("Hello " + name + " you are young at hart but your age is: " + age);
         };

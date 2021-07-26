@@ -55,7 +55,7 @@ public class ClientRsocketController {
         return clientRsocketService.fluxWithBackPressure(generate100HelloRequest());
     }
 
-    Flux<HelloRequest> generate100HelloRequest() {
+    private Flux<HelloRequest> generate100HelloRequest() {
         return Flux.
                 fromStream(IntStream.range(20, 121).mapToObj(age ->
                         new HelloRequest(RandomStringUtils.randomAlphanumeric(5), age)))
