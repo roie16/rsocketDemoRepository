@@ -34,10 +34,20 @@ public class ServerController {
         return ResponseEntity.ok(generateHelloMsg(name, age));
     }
 
-    @MessageMapping("say.hello.reactive.flux")
-    Flux<HelloResponse> helloResponseFlux(@Payload @Valid HelloRequest request) {
+    @MessageMapping("say.hello.reactive.flux.single")
+    Flux<HelloResponse> sayHelloReactiveSinglePayload(@Payload @Valid HelloRequest request) {
         Stream<HelloResponse> helloResponseStream = Stream.generate(() -> generateHelloMsg(request.name(), request.age()));
         return Flux.fromStream(helloResponseStream).delayElements(Duration.ofSeconds(1)).take(20);
+    }
+
+    @MessageMapping("say.hello.reactive.flux")
+    Flux<HelloResponse> sayHelloReactiveFluxPayload(@Payload Flux<HelloRequest> request) {
+        return request.map(helloRequest -> {
+            if ("Roie".equals(helloRequest.name())) {
+                throw new IllegalArgumentException("Go Away Roie");
+            }
+            return generateHelloMsg(helloRequest.name(), helloRequest.age());
+        });
     }
 
     @MessageMapping("say.hello.reactive.mono")

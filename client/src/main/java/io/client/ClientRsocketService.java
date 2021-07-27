@@ -23,9 +23,14 @@ public class ClientRsocketService {
         this.rsocketRequester = rsocketRequesterBuilder.tcp("localhost", 8888);
     }
 
-    public Flux<HelloResponse> fluxCall(HelloRequest helloRequest) {
+    public Flux<HelloResponse> singlePayloadCall(HelloRequest helloRequest) {
         log.info(helloRequest.toString());
-        return rsocketRequester.route("say.hello.reactive.flux").data(helloRequest)
+        return rsocketRequester.route("say.hello.reactive.flux.single").data(helloRequest)
+                .retrieveFlux(HelloResponse.class);
+    }
+
+    public Flux<HelloResponse> fluxCall(Flux<HelloRequest> flux) {
+        return rsocketRequester.route("say.hello.reactive.flux").data(flux)
                 .retrieveFlux(HelloResponse.class);
     }
 

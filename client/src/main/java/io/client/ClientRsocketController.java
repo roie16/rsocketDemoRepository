@@ -32,7 +32,7 @@ public class ClientRsocketController {
     @GetMapping(value = "/hellostreamflux", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Publisher<HelloResponse> helloStreamFlux(@RequestParam String name, @RequestParam int age) {
         HelloRequest helloRequest = new HelloRequest(name, age);
-        return clientRsocketService.fluxCall(helloRequest);
+        return clientRsocketService.singlePayloadCall(helloRequest);
     }
 
 
@@ -42,12 +42,18 @@ public class ClientRsocketController {
         return clientRsocketService.monoCall(helloRequest);
     }
 
-
-    @GetMapping(value = "/fluxwitherror", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-    public Publisher<HelloResponse> fluxWithError() {
+    @GetMapping(value = "/fluxwitherrormono", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Publisher<HelloResponse> fluxWithErrorMono() {
         Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Roie", 33), new HelloRequest("Daniel", 17),
-                new HelloRequest("Nitzan", 29)));
+                new HelloRequest("Nitzan", 41)));
         return clientRsocketService.fluxWithError(flux);
+    }
+
+    @GetMapping(value = "/fluxwitherror")
+    public Publisher<HelloResponse> fluxWithError() {
+        Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Daniel", 17), new HelloRequest("Roie", 33),
+                new HelloRequest("Nitzan", 41)));
+        return clientRsocketService.fluxCall(flux);
     }
 
     @GetMapping(value = "/fluxwithbackpressure", produces = MediaType.TEXT_EVENT_STREAM_VALUE)

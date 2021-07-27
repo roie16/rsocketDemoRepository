@@ -15,7 +15,7 @@ import static reactor.core.scheduler.Schedulers.fromExecutorService;
  * @package com.example.demo
  * @date 9/20/2020
  */
-public class ReactorExample {
+public class ReactorExamples {
 
     @SneakyThrows
     public static void main(String[] args) {
