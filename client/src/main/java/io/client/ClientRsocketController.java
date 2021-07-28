@@ -44,14 +44,14 @@ public class ClientRsocketController {
 
     @GetMapping(value = "/fluxwitherrormono", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Publisher<HelloResponse> fluxWithErrorMono() {
-        Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Roie", 33), new HelloRequest("Daniel", 17),
+        Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Roie", 34), new HelloRequest("Daniel", 17),
                 new HelloRequest("Nitzan", 41)));
         return clientRsocketService.fluxWithError(flux);
     }
 
     @GetMapping(value = "/fluxwitherror")
     public Publisher<HelloResponse> fluxWithError() {
-        Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Daniel", 17), new HelloRequest("Roie", 33),
+        Flux<HelloRequest> flux = Flux.fromStream(Stream.of(new HelloRequest("Roie", 34), new HelloRequest("Roni", 27), new HelloRequest("Daniel", 17),
                 new HelloRequest("Nitzan", 41)));
         return clientRsocketService.fluxCall(flux);
     }

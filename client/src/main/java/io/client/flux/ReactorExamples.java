@@ -62,7 +62,6 @@ public class ReactorExamples {
  elements.forEach(System.out::println);
  */
 
-
 /**
  * with backpressure
  List<Integer> elements = new ArrayList<>();
