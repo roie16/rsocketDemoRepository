@@ -50,7 +50,7 @@ public class ReactorExamples {
  */
 
 /**
- * parallel
+ * Schedulers(go over )
  Flux.just(1, 2, "A")
  .subscribeOn(fromExecutorService(newWorkStealingPool())) // Schedulers.parallel()
  .subscribe(elemt -> {
@@ -63,7 +63,7 @@ public class ReactorExamples {
  */
 
 /**
- * with backpressure
+ * with costume backpressure
  List<Integer> elements = new ArrayList<>();
  Flux.just(1, 2, 3, 4)
  .log()
